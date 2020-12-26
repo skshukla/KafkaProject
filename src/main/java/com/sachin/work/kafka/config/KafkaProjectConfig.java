@@ -1,5 +1,6 @@
 package com.sachin.work.kafka.config;
 
+import com.sachin.work.kafka.producer.CustomPartitioner;
 import java.util.HashMap;
 import java.util.Map;
 import org.apache.kafka.clients.producer.ProducerConfig;
@@ -28,6 +29,9 @@ public class KafkaProjectConfig {
     props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, KAFKA_BROKERS);
     props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
     props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
+
+    props.put(ProducerConfig.PARTITIONER_CLASS_CONFIG, CustomPartitioner.class);
+
     return new DefaultKafkaProducerFactory<>(props);
   }
 }
