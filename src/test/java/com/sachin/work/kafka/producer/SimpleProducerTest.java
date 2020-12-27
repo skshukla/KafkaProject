@@ -2,14 +2,16 @@ package com.sachin.work.kafka.producer;
 
 import com.sachin.work.kafka.BaseTest;
 import java.util.concurrent.ExecutionException;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.support.SendResult;
+import org.springframework.util.Assert;
 import org.springframework.util.concurrent.ListenableFuture;
 import org.springframework.util.concurrent.ListenableFutureCallback;
 
 
-class ProducerTest extends BaseTest {
+class SimpleProducerTest extends BaseTest {
 
   @Autowired
   private SimpleProducer simpleProducer;
@@ -18,6 +20,9 @@ class ProducerTest extends BaseTest {
   void produceMessage_FireAndForget() throws InterruptedException, ExecutionException {
     this.simpleProducer.produce("Message produced from Java Layer");
   }
+
+
+
 
 
   @Test
@@ -45,7 +50,7 @@ class ProducerTest extends BaseTest {
 
   @Test
   void produceMessage_ASync() throws InterruptedException, ExecutionException {
-    final ListenableFuture<SendResult<String, String>> future =  this.simpleProducer.produce("Message produced from Java Layer, Async Retries");
+    final ListenableFuture<SendResult<String, String>> future =  this.simpleProducer.produce("k5", "Message produced from Java Layer, Async Retries");
     future.addCallback( new ListenableFutureCallback<SendResult<String, String>>() {
 
       @Override
@@ -61,6 +66,7 @@ class ProducerTest extends BaseTest {
     });
 
     System.out.println("Execution Done for method produceMessage_ASync()");
-    Thread.currentThread().sleep(1000);
+    Thread.currentThread().sleep(3 * 1000);
   }
+
 }

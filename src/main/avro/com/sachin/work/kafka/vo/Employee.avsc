@@ -1,0 +1,11 @@
+{
+   "namespace": "com.sachin.work.kafka.vo",
+   "type": "record",
+   "name": "Employee",
+   "fields": [
+      {"name": "id", "type": "int"},
+      {"name": "name", "type": "string"},
+      {"name": "placeOfBirth", "type": "string"},
+      {"name": "address", "type": ["null", "string"], "default": null}
+   ]
+}
