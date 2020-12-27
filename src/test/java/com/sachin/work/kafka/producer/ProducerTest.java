@@ -22,11 +22,11 @@ class ProducerTest extends BaseTest {
 
   @Test
   void sendMessageToDifferentPartitions() throws InterruptedException, ExecutionException {
-    push("1", "Message {1} produced from Java Layer, Sync");
-    push("2", "Message {2} produced from Java Layer, Sync");
-    push("3", "Message {3} produced from Java Layer, Sync");
-    push("4", "Message {4} produced from Java Layer, Sync");
-    push("5", "Message {5} produced from Java Layer, Sync");
+    push("1", "Message {1} produced from Java Layer, Sync - Testing Retries count config");
+//    push("2", "Message {2} produced from Java Layer, Sync");
+//    push("3", "Message {3} produced from Java Layer, Sync");
+//    push("4", "Message {4} produced from Java Layer, Sync");
+//    push("5", "Message {5} produced from Java Layer, Sync");
   }
 
   private void push(final String key, final String msgVal) throws InterruptedException, ExecutionException {
@@ -45,7 +45,7 @@ class ProducerTest extends BaseTest {
 
   @Test
   void produceMessage_ASync() throws InterruptedException, ExecutionException {
-    final ListenableFuture<SendResult<String, String>> future =  this.simpleProducer.produce("Message produced from Java Layer, Async");
+    final ListenableFuture<SendResult<String, String>> future =  this.simpleProducer.produce("Message produced from Java Layer, Async Retries");
     future.addCallback( new ListenableFutureCallback<SendResult<String, String>>() {
 
       @Override
@@ -56,6 +56,7 @@ class ProducerTest extends BaseTest {
       @Override
       public void onFailure(final Throwable ex) {
         System.out.println(String.format("Exception while sending message {%s}", ex.getMessage()));
+        ex.printStackTrace();
       }
     });
 
