@@ -23,12 +23,15 @@ public class SimpleProducer {
   private KafkaTemplate<String, String> kafkaTemplate;
 
   public ListenableFuture<SendResult<String, String>> produce(final String msg) {
-    final ProducerRecord<String, String> record = new ProducerRecord<>(TOPIC, null, msg);
-    return this.kafkaTemplate.send(record);
+    return this.produce(null, msg);
   }
 
   public ListenableFuture<SendResult<String, String>> produce(final String key, final String msgVal) {
-    final ProducerRecord<String, String> record = new ProducerRecord<>(TOPIC, key, msgVal);
+    return this.produce(TOPIC, key, msgVal);
+  }
+
+  public ListenableFuture<SendResult<String, String>> produce(final String topic, final String key, final String msgVal) {
+    final ProducerRecord<String, String> record = new ProducerRecord<>(topic, key, msgVal);
     return this.kafkaTemplate.send(record);
   }
 

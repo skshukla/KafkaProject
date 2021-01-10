@@ -5,6 +5,7 @@ import java.util.concurrent.ExecutionException;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.support.SendResult;
 import org.springframework.util.Assert;
 import org.springframework.util.concurrent.ListenableFuture;
@@ -12,6 +13,11 @@ import org.springframework.util.concurrent.ListenableFutureCallback;
 
 
 class SimpleProducerTest extends BaseTest {
+
+
+  @Value("${kafka.compacted.topic.01}")
+  private String COMPACTED_TOPIC_01;
+
 
   @Autowired
   private SimpleProducer simpleProducer;

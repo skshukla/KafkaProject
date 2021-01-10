@@ -26,4 +26,10 @@ public class AvroProducer {
     return this.kafkaTemplate_AvroSerializerAndDeserializer.send(record);
   }
 
+  public ListenableFuture<SendResult<String, Employee>> produce(final String topic, final String key, final Employee employee) {
+    final ProducerRecord<String, Employee> record = new ProducerRecord<>(topic, key, employee);
+    return this.kafkaTemplate_AvroSerializerAndDeserializer.send(record);
+  }
+
+
 }

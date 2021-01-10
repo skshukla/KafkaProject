@@ -26,6 +26,7 @@ public class BaseTest {
     } catch (InterruptedException e) {
       e.printStackTrace();
     }
+    System.out.println("Exiting BaseTest#tearDown().....");
   }
 
   @Autowired

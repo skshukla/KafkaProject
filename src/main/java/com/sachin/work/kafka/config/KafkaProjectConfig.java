@@ -40,8 +40,8 @@ public class KafkaProjectConfig {
     props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
 
 //    props.put(ProducerConfig.PARTITIONER_CLASS_CONFIG, CustomPartitioner.class);
-    props.put(ProducerConfig.RETRIES_CONFIG, 3);
-    props.put(ProducerConfig.REQUEST_TIMEOUT_MS_CONFIG, 1);
+//    props.put(ProducerConfig.RETRIES_CONFIG, 3);
+//    props.put(ProducerConfig.REQUEST_TIMEOUT_MS_CONFIG, 1);
 
     return new DefaultKafkaProducerFactory<>(props);
   }
