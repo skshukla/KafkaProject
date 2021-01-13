@@ -1,6 +1,6 @@
 package com.sachin.work.kafka.producer;
 
-import com.sachin.work.kafka.vo.Employee;
+import com.sachin.work.kafka.generatedVo.Employee;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

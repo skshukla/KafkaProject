@@ -3,7 +3,7 @@
  *
  * DO NOT EDIT DIRECTLY
  */
-package com.sachin.work.kafka.vo;
+package com.sachin.work.kafka.generatedVo;
 
 import org.apache.avro.generic.GenericArray;
 import org.apache.avro.specific.SpecificData;
@@ -14,8 +14,8 @@ import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
 public class Employee extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = 2160493570061124658L;
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Employee\",\"namespace\":\"com.sachin.work.kafka.vo\",\"fields\":[{\"name\":\"id\",\"type\":\"int\"},{\"name\":\"name\",\"type\":\"string\"},{\"name\":\"address\",\"type\":[\"null\",\"string\"],\"default\":null}]}");
+  private static final long serialVersionUID = -7199833933539403299L;
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Employee\",\"namespace\":\"com.sachin.work.kafka.generatedVo\",\"fields\":[{\"name\":\"id\",\"type\":\"int\"},{\"name\":\"name\",\"type\":\"string\"},{\"name\":\"placeOfBirth\",\"type\":\"string\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static SpecificData MODEL$ = new SpecificData();
@@ -73,7 +73,7 @@ public class Employee extends org.apache.avro.specific.SpecificRecordBase implem
 
    private int id;
    private java.lang.CharSequence name;
-   private java.lang.CharSequence address;
+   private java.lang.CharSequence placeOfBirth;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -86,12 +86,12 @@ public class Employee extends org.apache.avro.specific.SpecificRecordBase implem
    * All-args constructor.
    * @param id The new value for id
    * @param name The new value for name
-   * @param address The new value for address
+   * @param placeOfBirth The new value for placeOfBirth
    */
-  public Employee(java.lang.Integer id, java.lang.CharSequence name, java.lang.CharSequence address) {
+  public Employee(java.lang.Integer id, java.lang.CharSequence name, java.lang.CharSequence placeOfBirth) {
     this.id = id;
     this.name = name;
-    this.address = address;
+    this.placeOfBirth = placeOfBirth;
   }
 
   public org.apache.avro.specific.SpecificData getSpecificData() { return MODEL$; }
@@ -101,7 +101,7 @@ public class Employee extends org.apache.avro.specific.SpecificRecordBase implem
     switch (field$) {
     case 0: return id;
     case 1: return name;
-    case 2: return address;
+    case 2: return placeOfBirth;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -112,7 +112,7 @@ public class Employee extends org.apache.avro.specific.SpecificRecordBase implem
     switch (field$) {
     case 0: id = (java.lang.Integer)value$; break;
     case 1: name = (java.lang.CharSequence)value$; break;
-    case 2: address = (java.lang.CharSequence)value$; break;
+    case 2: placeOfBirth = (java.lang.CharSequence)value$; break;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -152,28 +152,28 @@ public class Employee extends org.apache.avro.specific.SpecificRecordBase implem
   }
 
   /**
-   * Gets the value of the 'address' field.
-   * @return The value of the 'address' field.
+   * Gets the value of the 'placeOfBirth' field.
+   * @return The value of the 'placeOfBirth' field.
    */
-  public java.lang.CharSequence getAddress() {
-    return address;
+  public java.lang.CharSequence getPlaceOfBirth() {
+    return placeOfBirth;
   }
 
 
   /**
-   * Sets the value of the 'address' field.
+   * Sets the value of the 'placeOfBirth' field.
    * @param value the value to set.
    */
-  public void setAddress(java.lang.CharSequence value) {
-    this.address = value;
+  public void setPlaceOfBirth(java.lang.CharSequence value) {
+    this.placeOfBirth = value;
   }
 
   /**
    * Creates a new Employee RecordBuilder.
    * @return A new Employee RecordBuilder
    */
-  public static com.sachin.work.kafka.vo.Employee.Builder newBuilder() {
-    return new com.sachin.work.kafka.vo.Employee.Builder();
+  public static com.sachin.work.kafka.generatedVo.Employee.Builder newBuilder() {
+    return new com.sachin.work.kafka.generatedVo.Employee.Builder();
   }
 
   /**
@@ -181,11 +181,11 @@ public class Employee extends org.apache.avro.specific.SpecificRecordBase implem
    * @param other The existing builder to copy.
    * @return A new Employee RecordBuilder
    */
-  public static com.sachin.work.kafka.vo.Employee.Builder newBuilder(com.sachin.work.kafka.vo.Employee.Builder other) {
+  public static com.sachin.work.kafka.generatedVo.Employee.Builder newBuilder(com.sachin.work.kafka.generatedVo.Employee.Builder other) {
     if (other == null) {
-      return new com.sachin.work.kafka.vo.Employee.Builder();
+      return new com.sachin.work.kafka.generatedVo.Employee.Builder();
     } else {
-      return new com.sachin.work.kafka.vo.Employee.Builder(other);
+      return new com.sachin.work.kafka.generatedVo.Employee.Builder(other);
     }
   }
 
@@ -194,11 +194,11 @@ public class Employee extends org.apache.avro.specific.SpecificRecordBase implem
    * @param other The existing instance to copy.
    * @return A new Employee RecordBuilder
    */
-  public static com.sachin.work.kafka.vo.Employee.Builder newBuilder(com.sachin.work.kafka.vo.Employee other) {
+  public static com.sachin.work.kafka.generatedVo.Employee.Builder newBuilder(com.sachin.work.kafka.generatedVo.Employee other) {
     if (other == null) {
-      return new com.sachin.work.kafka.vo.Employee.Builder();
+      return new com.sachin.work.kafka.generatedVo.Employee.Builder();
     } else {
-      return new com.sachin.work.kafka.vo.Employee.Builder(other);
+      return new com.sachin.work.kafka.generatedVo.Employee.Builder(other);
     }
   }
 
@@ -211,7 +211,7 @@ public class Employee extends org.apache.avro.specific.SpecificRecordBase implem
 
     private int id;
     private java.lang.CharSequence name;
-    private java.lang.CharSequence address;
+    private java.lang.CharSequence placeOfBirth;
 
     /** Creates a new Builder */
     private Builder() {
@@ -222,7 +222,7 @@ public class Employee extends org.apache.avro.specific.SpecificRecordBase implem
      * Creates a Builder by copying an existing Builder.
      * @param other The existing Builder to copy.
      */
-    private Builder(com.sachin.work.kafka.vo.Employee.Builder other) {
+    private Builder(com.sachin.work.kafka.generatedVo.Employee.Builder other) {
       super(other);
       if (isValidValue(fields()[0], other.id)) {
         this.id = data().deepCopy(fields()[0].schema(), other.id);
@@ -232,8 +232,8 @@ public class Employee extends org.apache.avro.specific.SpecificRecordBase implem
         this.name = data().deepCopy(fields()[1].schema(), other.name);
         fieldSetFlags()[1] = other.fieldSetFlags()[1];
       }
-      if (isValidValue(fields()[2], other.address)) {
-        this.address = data().deepCopy(fields()[2].schema(), other.address);
+      if (isValidValue(fields()[2], other.placeOfBirth)) {
+        this.placeOfBirth = data().deepCopy(fields()[2].schema(), other.placeOfBirth);
         fieldSetFlags()[2] = other.fieldSetFlags()[2];
       }
     }
@@ -242,7 +242,7 @@ public class Employee extends org.apache.avro.specific.SpecificRecordBase implem
      * Creates a Builder by copying an existing Employee instance
      * @param other The existing instance to copy.
      */
-    private Builder(com.sachin.work.kafka.vo.Employee other) {
+    private Builder(com.sachin.work.kafka.generatedVo.Employee other) {
       super(SCHEMA$);
       if (isValidValue(fields()[0], other.id)) {
         this.id = data().deepCopy(fields()[0].schema(), other.id);
@@ -252,8 +252,8 @@ public class Employee extends org.apache.avro.specific.SpecificRecordBase implem
         this.name = data().deepCopy(fields()[1].schema(), other.name);
         fieldSetFlags()[1] = true;
       }
-      if (isValidValue(fields()[2], other.address)) {
-        this.address = data().deepCopy(fields()[2].schema(), other.address);
+      if (isValidValue(fields()[2], other.placeOfBirth)) {
+        this.placeOfBirth = data().deepCopy(fields()[2].schema(), other.placeOfBirth);
         fieldSetFlags()[2] = true;
       }
     }
@@ -272,7 +272,7 @@ public class Employee extends org.apache.avro.specific.SpecificRecordBase implem
       * @param value The value of 'id'.
       * @return This builder.
       */
-    public com.sachin.work.kafka.vo.Employee.Builder setId(int value) {
+    public com.sachin.work.kafka.generatedVo.Employee.Builder setId(int value) {
       validate(fields()[0], value);
       this.id = value;
       fieldSetFlags()[0] = true;
@@ -292,7 +292,7 @@ public class Employee extends org.apache.avro.specific.SpecificRecordBase implem
       * Clears the value of the 'id' field.
       * @return This builder.
       */
-    public com.sachin.work.kafka.vo.Employee.Builder clearId() {
+    public com.sachin.work.kafka.generatedVo.Employee.Builder clearId() {
       fieldSetFlags()[0] = false;
       return this;
     }
@@ -311,7 +311,7 @@ public class Employee extends org.apache.avro.specific.SpecificRecordBase implem
       * @param value The value of 'name'.
       * @return This builder.
       */
-    public com.sachin.work.kafka.vo.Employee.Builder setName(java.lang.CharSequence value) {
+    public com.sachin.work.kafka.generatedVo.Employee.Builder setName(java.lang.CharSequence value) {
       validate(fields()[1], value);
       this.name = value;
       fieldSetFlags()[1] = true;
@@ -331,48 +331,48 @@ public class Employee extends org.apache.avro.specific.SpecificRecordBase implem
       * Clears the value of the 'name' field.
       * @return This builder.
       */
-    public com.sachin.work.kafka.vo.Employee.Builder clearName() {
+    public com.sachin.work.kafka.generatedVo.Employee.Builder clearName() {
       name = null;
       fieldSetFlags()[1] = false;
       return this;
     }
 
     /**
-      * Gets the value of the 'address' field.
+      * Gets the value of the 'placeOfBirth' field.
       * @return The value.
       */
-    public java.lang.CharSequence getAddress() {
-      return address;
+    public java.lang.CharSequence getPlaceOfBirth() {
+      return placeOfBirth;
     }
 
 
     /**
-      * Sets the value of the 'address' field.
-      * @param value The value of 'address'.
+      * Sets the value of the 'placeOfBirth' field.
+      * @param value The value of 'placeOfBirth'.
       * @return This builder.
       */
-    public com.sachin.work.kafka.vo.Employee.Builder setAddress(java.lang.CharSequence value) {
+    public com.sachin.work.kafka.generatedVo.Employee.Builder setPlaceOfBirth(java.lang.CharSequence value) {
       validate(fields()[2], value);
-      this.address = value;
+      this.placeOfBirth = value;
       fieldSetFlags()[2] = true;
       return this;
     }
 
     /**
-      * Checks whether the 'address' field has been set.
-      * @return True if the 'address' field has been set, false otherwise.
+      * Checks whether the 'placeOfBirth' field has been set.
+      * @return True if the 'placeOfBirth' field has been set, false otherwise.
       */
-    public boolean hasAddress() {
+    public boolean hasPlaceOfBirth() {
       return fieldSetFlags()[2];
     }
 
 
     /**
-      * Clears the value of the 'address' field.
+      * Clears the value of the 'placeOfBirth' field.
       * @return This builder.
       */
-    public com.sachin.work.kafka.vo.Employee.Builder clearAddress() {
-      address = null;
+    public com.sachin.work.kafka.generatedVo.Employee.Builder clearPlaceOfBirth() {
+      placeOfBirth = null;
       fieldSetFlags()[2] = false;
       return this;
     }
@@ -384,7 +384,7 @@ public class Employee extends org.apache.avro.specific.SpecificRecordBase implem
         Employee record = new Employee();
         record.id = fieldSetFlags()[0] ? this.id : (java.lang.Integer) defaultValue(fields()[0]);
         record.name = fieldSetFlags()[1] ? this.name : (java.lang.CharSequence) defaultValue(fields()[1]);
-        record.address = fieldSetFlags()[2] ? this.address : (java.lang.CharSequence) defaultValue(fields()[2]);
+        record.placeOfBirth = fieldSetFlags()[2] ? this.placeOfBirth : (java.lang.CharSequence) defaultValue(fields()[2]);
         return record;
       } catch (org.apache.avro.AvroMissingFieldException e) {
         throw e;
@@ -421,13 +421,7 @@ public class Employee extends org.apache.avro.specific.SpecificRecordBase implem
 
     out.writeString(this.name);
 
-    if (this.address == null) {
-      out.writeIndex(0);
-      out.writeNull();
-    } else {
-      out.writeIndex(1);
-      out.writeString(this.address);
-    }
+    out.writeString(this.placeOfBirth);
 
   }
 
@@ -440,12 +434,7 @@ public class Employee extends org.apache.avro.specific.SpecificRecordBase implem
 
       this.name = in.readString(this.name instanceof Utf8 ? (Utf8)this.name : null);
 
-      if (in.readIndex() != 1) {
-        in.readNull();
-        this.address = null;
-      } else {
-        this.address = in.readString(this.address instanceof Utf8 ? (Utf8)this.address : null);
-      }
+      this.placeOfBirth = in.readString(this.placeOfBirth instanceof Utf8 ? (Utf8)this.placeOfBirth : null);
 
     } else {
       for (int i = 0; i < 3; i++) {
@@ -459,12 +448,7 @@ public class Employee extends org.apache.avro.specific.SpecificRecordBase implem
           break;
 
         case 2:
-          if (in.readIndex() != 1) {
-            in.readNull();
-            this.address = null;
-          } else {
-            this.address = in.readString(this.address instanceof Utf8 ? (Utf8)this.address : null);
-          }
+          this.placeOfBirth = in.readString(this.placeOfBirth instanceof Utf8 ? (Utf8)this.placeOfBirth : null);
           break;
 
         default:

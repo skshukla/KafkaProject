@@ -1,11 +1,19 @@
 package com.sachin.work.kafka.config;
 
 import com.google.common.collect.ImmutableMap;
-import com.sachin.work.kafka.vo.Employee;
+import com.sachin.work.kafka.generatedVo.Employee;
+import com.sachin.work.kafka.vo.Contact;
+import com.sachin.work.kafka.vo.KafkaMessage;
+import com.sachin.work.kafka.vo.KafkaMessageDeserializer;
+import com.sachin.work.kafka.vo.KafkaMessageSerializer;
 import io.confluent.kafka.serializers.KafkaAvroSerializer;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
+import org.apache.kafka.clients.consumer.ConsumerConfig;
+import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.clients.producer.ProducerConfig;
+import org.apache.kafka.common.serialization.StringDeserializer;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -21,9 +29,26 @@ public class KafkaProjectConfig {
   private String KAFKA_BROKERS;
 
   @Bean
-  public KafkaTemplate<String, String> kafkaTemplate() {
-    final KafkaTemplate<String, String> kafkaTemplate = new KafkaTemplate<>(this.producerFactory());
+  public KafkaTemplate<String, String> kafkaTemplate_Simple() {
+    final KafkaTemplate<String, String> kafkaTemplate = new KafkaTemplate<>(this.producerFactory_Simple());
     return kafkaTemplate;
+  }
+
+  @Bean
+  public <T> KafkaTemplate<String, KafkaMessage<T>> kafkaTemplate_GenericMessage() {
+    final KafkaTemplate<String, KafkaMessage<T>> kafkaTemplate = new KafkaTemplate<>(this.producerFactory_GenericMessage());
+    return kafkaTemplate;
+  }
+
+  @Bean
+  public KafkaConsumer<String, KafkaMessage<Contact>> kafkaConsumer() {
+    final Properties props = new Properties();
+    props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, KAFKA_BROKERS);
+    props.put(ConsumerConfig.GROUP_ID_CONFIG, "ga_1");
+    props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
+    props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, KafkaMessageDeserializer.class);
+    props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
+    return new KafkaConsumer<>(props);
   }
 
   @Bean
@@ -33,7 +58,7 @@ public class KafkaProjectConfig {
   }
 
 
-  private ProducerFactory<String, String> producerFactory() {
+  private ProducerFactory<String, String> producerFactory_Simple() {
     final Map<String, Object> props = new HashMap<>();
     props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, KAFKA_BROKERS);
     props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
@@ -45,6 +70,15 @@ public class KafkaProjectConfig {
 
     return new DefaultKafkaProducerFactory<>(props);
   }
+
+  private <T> ProducerFactory<String, KafkaMessage<T>> producerFactory_GenericMessage() {
+    final Map<String, Object> props = new HashMap<>();
+    props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, KAFKA_BROKERS);
+    props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
+    props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, KafkaMessageSerializer.class);
+    return new DefaultKafkaProducerFactory<>(props);
+  }
+
 
   private ProducerFactory<String, Employee> producerFactory_AvroSerializerAndDeserializer() {
     final Map<String, Object> props = ImmutableMap

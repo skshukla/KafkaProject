@@ -1,18 +1,22 @@
 package com.sachin.work.kafka.producer;
 
 import com.sachin.work.kafka.BaseTest;
+import com.sachin.work.kafka.generatedVo.Employee;
+import com.sachin.work.kafka.vo.Contact;
+import com.sachin.work.kafka.vo.KafkaMessage;
+import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.support.SendResult;
-import org.springframework.util.Assert;
 import org.springframework.util.concurrent.ListenableFuture;
 import org.springframework.util.concurrent.ListenableFutureCallback;
 
 
 class SimpleProducerTest extends BaseTest {
+
 
 
   @Value("${kafka.compacted.topic.01}")
@@ -24,31 +28,35 @@ class SimpleProducerTest extends BaseTest {
 
   @Test
   void produceMessage_FireAndForget() throws InterruptedException, ExecutionException {
-    this.simpleProducer.produce("Message produced from Java Layer");
+    this.simpleProducer.produce(TOPIC, null,"This is Sample Message from Java Layer!!");
   }
 
 
-
+  @Test
+  void produceMessage_FireAndForget_Generic() throws InterruptedException, ExecutionException {
+    final KafkaMessage<Contact> kafkaMessage = new KafkaMessage<>(new Contact(2, "Shukla, Sachin Kumar"));
+    this.simpleProducer.produce(TOPIC, kafkaMessage.getUuid(), kafkaMessage);
+  }
 
 
   @Test
   void sendMessageToDifferentPartitions() throws InterruptedException, ExecutionException {
     push("1", "Message {1} produced from Java Layer, Sync - Testing Retries count config");
-//    push("2", "Message {2} produced from Java Layer, Sync");
-//    push("3", "Message {3} produced from Java Layer, Sync");
-//    push("4", "Message {4} produced from Java Layer, Sync");
-//    push("5", "Message {5} produced from Java Layer, Sync");
+    push("2", "Message {2} produced from Java Layer, Sync");
+    push("3", "Message {3} produced from Java Layer, Sync");
+    push("4", "Message {4} produced from Java Layer, Sync");
+    push("5", "Message {5} produced from Java Layer, Sync");
   }
 
   private void push(final String key, final String msgVal) throws InterruptedException, ExecutionException {
-    final ListenableFuture<SendResult<String, String>> future =  this.simpleProducer.produce(key, msgVal);
+    final ListenableFuture<SendResult<String, String>> future =  this.simpleProducer.produce(TOPIC, key, msgVal);
     final SendResult<String, String> result = future.get();
     System.out.println(String.format("Message pushed to partition {%d} with offset as {%d}", result.getRecordMetadata().partition(), result.getRecordMetadata().offset()));
   }
 
   @Test
   void produceMessage_Sync() throws InterruptedException, ExecutionException {
-    final ListenableFuture<SendResult<String, String>> future =  this.simpleProducer.produce("Message produced from Java Layer, Sync");
+    final ListenableFuture<SendResult<String, String>> future =  this.simpleProducer.produce(TOPIC, null, "Message produced from Java Layer, Sync");
     final SendResult<String, String> result = future.get();
     System.out.println("Metadata : " + result.getRecordMetadata().offset());
     System.out.println("Execution Done for method produceMessage_Sync()");
@@ -56,7 +64,7 @@ class SimpleProducerTest extends BaseTest {
 
   @Test
   void produceMessage_ASync() throws InterruptedException, ExecutionException {
-    final ListenableFuture<SendResult<String, String>> future =  this.simpleProducer.produce("k5", "Message produced from Java Layer, Async Retries");
+    final ListenableFuture<SendResult<String, String>> future =  this.simpleProducer.produce(TOPIC, "k5", "Message produced from Java Layer, Async Retries");
     future.addCallback( new ListenableFutureCallback<SendResult<String, String>>() {
 
       @Override

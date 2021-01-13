@@ -1,0 +1,10 @@
+{
+   "namespace": "com.sachin.work.kafka.generatedVo",
+   "type": "record",
+   "name": "Employee",
+   "fields": [
+      {"name": "id", "type": "int"},
+      {"name": "name", "type": "string"},
+      {"name": "placeOfBirth", "type": "string"}
+   ]
+}

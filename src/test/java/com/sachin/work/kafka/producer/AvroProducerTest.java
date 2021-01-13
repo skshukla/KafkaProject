@@ -1,7 +1,7 @@
 package com.sachin.work.kafka.producer;
 
 import com.sachin.work.kafka.BaseTest;
-import com.sachin.work.kafka.vo.Employee;
+import com.sachin.work.kafka.generatedVo.Employee;
 import java.util.concurrent.ExecutionException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
