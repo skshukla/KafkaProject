@@ -1,5 +1,7 @@
 package com.sachin.work.kafka.util;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Random;
 import java.util.stream.IntStream;
 
@@ -21,6 +23,11 @@ public class GenUtil {
   }
   public static boolean getRandomTrueOrFalse() {
     return new Random().nextBoolean();
+  }
+
+  public static String getDateToStr(final Date d) {
+    final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+    return sdf.format(d);
   }
 
 }

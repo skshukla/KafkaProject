@@ -34,18 +34,19 @@ class SimpleProducerTest extends BaseTest {
 
   @Test
   void produceMessage_FireAndForget_Generic() throws InterruptedException, ExecutionException {
-    final KafkaMessage<Contact> kafkaMessage = new KafkaMessage<>(new Contact(2, "Shukla, Sachin Kumar"));
+    final KafkaMessage<Contact> kafkaMessage = new KafkaMessage<>(new Contact(1, "Shukla, Sachin Kumar"));
     this.simpleProducer.produce(TOPIC, kafkaMessage.getUuid(), kafkaMessage);
   }
 
 
   @Test
   void sendMessageToDifferentPartitions() throws InterruptedException, ExecutionException {
-    push("1", "Message {1} produced from Java Layer, Sync - Testing Retries count config");
-    push("2", "Message {2} produced from Java Layer, Sync");
-    push("3", "Message {3} produced from Java Layer, Sync");
-    push("4", "Message {4} produced from Java Layer, Sync");
-    push("5", "Message {5} produced from Java Layer, Sync");
+
+    for (int i=0; i<10000; i++) {
+      push("1", String.format("my message {%d}", (i+1)));
+//      Thread.sleep(20*1000);
+    }
+
   }
 
   private void push(final String key, final String msgVal) throws InterruptedException, ExecutionException {
