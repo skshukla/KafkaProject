@@ -47,7 +47,7 @@ public class KafkaProjectConfig {
     props.put(ConsumerConfig.GROUP_ID_CONFIG, "ga_1");
     props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
     props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, KafkaMessageDeserializer.class);
-    props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
+    props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "latest");
     return new KafkaConsumer<>(props);
   }
 
@@ -60,6 +60,7 @@ public class KafkaProjectConfig {
 
   private ProducerFactory<String, String> producerFactory_Simple() {
     final Map<String, Object> props = new HashMap<>();
+    props.put(ProducerConfig.RETRY_BACKOFF_MS_CONFIG, 10);
     props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, KAFKA_BROKERS);
     props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
     props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class);

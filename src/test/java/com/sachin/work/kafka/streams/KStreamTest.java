@@ -9,6 +9,7 @@ import com.sachin.work.kafka.vo.KafkaMessageDeserializer;
 import com.sachin.work.kafka.vo.KafkaMessageSerializer;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Properties;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentHashMap;
@@ -37,7 +38,7 @@ import org.springframework.beans.factory.annotation.Value;
 public class KStreamTest extends BaseTest {
 
   private final String APP_ID = "my-app";
-  private final int START_STREAM_FOR_MINUTES = 30;
+  private final int START_STREAM_FOR_MINUTES = 5;
   private final int TIME_DIFF_IN_EACH_MESSAGE_PRODUCED_IN_MS = 2 * 1000;
 
   @Value("${kstream.simple.user.topic}")
@@ -61,9 +62,12 @@ public class KStreamTest extends BaseTest {
   @Test
   public void testKStream() throws Exception {
 
+    // https://spring.io/blog/2019/12/06/stream-processing-with-spring-cloud-stream-and-apache-kafka-streams-part-5-application-customizations
+
     final ExecutorService manager = Executors.newFixedThreadPool(2);
     manager.submit(new MyCallable());
     manager.shutdown();
+
 
     Properties props = new Properties();
     props.put(StreamsConfig.APPLICATION_ID_CONFIG, APP_ID);
