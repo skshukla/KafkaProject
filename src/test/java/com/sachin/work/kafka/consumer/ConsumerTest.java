@@ -17,6 +17,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
+
+
+
 public class ConsumerTest extends BaseTest {
 
   @Value("${kafka.topic}")
@@ -24,6 +27,11 @@ public class ConsumerTest extends BaseTest {
 
   @Autowired
   private KafkaConsumer<String, KafkaMessage<Contact>> kafkaConsumer;
+
+
+  /**
+   * mvn -Dtest=com.sachin.work.kafka.consumer.ConsumerTest#testConsumer test
+   */
 
   @Test
   public void testConsumer() {
@@ -34,8 +42,10 @@ public class ConsumerTest extends BaseTest {
         System.out.println(String.format("[%s] - Inside Consumer while loop for i = {%d}",
             GenUtil.getDateToStr(new Date()), ++i));
         final ConsumerRecords<String, KafkaMessage<Contact>> records = this.kafkaConsumer.poll(1 * 1000);
-        System.out.println(String.format("[%s] - Got the Consumer recors for i = {%d}\n",
-            GenUtil.getDateToStr(new Date()), i));
+        if (records.count() > 0) {
+          System.out.println(String.format("[%s] - Got the Consumer recors for i = {%d}, total records got {%d}\n",
+              GenUtil.getDateToStr(new Date()), i, records.count()));
+        }
         for (final ConsumerRecord<String, KafkaMessage<Contact>> record : records) {
           final KafkaMessage<Contact> kafkaMessage = record.value();
           System.out.println(String.format("Partition {%s}, Offset {%s}, Key {%s}, Value {%s}", record.partition(), record.offset(), record.key(), new Gson().toJson(kafkaMessage)));
