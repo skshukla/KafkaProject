@@ -14,6 +14,9 @@ import org.springframework.kafka.support.SendResult;
 import org.springframework.util.concurrent.ListenableFuture;
 import org.springframework.util.concurrent.ListenableFutureCallback;
 
+/**
+ *
+ */
 
 class SimpleProducerTest extends BaseTest {
 
@@ -31,6 +34,10 @@ class SimpleProducerTest extends BaseTest {
     this.simpleProducer.produce(TOPIC, null,"This is Sample Message from Java Layer!!");
   }
 
+
+  /**
+   * mvn -Dtest=com.sachin.work.kafka.producer.SimpleProducerTest#produceMessage_FireAndForget_Generic test
+   */
 
   @Test
   void produceMessage_FireAndForget_Generic() throws InterruptedException, ExecutionException {
