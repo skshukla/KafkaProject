@@ -1,9 +1,23 @@
 package com.sachin.work.kafka.util;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.MappingIterator;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.Random;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+
+import com.fasterxml.jackson.dataformat.csv.CsvMapper;
+import com.fasterxml.jackson.dataformat.csv.CsvSchema;
+
+
 
 public class GenUtil {
 
@@ -28,6 +42,40 @@ public class GenUtil {
   public static String getDateToStr(final Date d) {
     final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
     return sdf.format(d);
+  }
+
+  public static List<String> getJsonFromCSVFile(final File file) throws IOException {
+    final List<Map<?, ?>> dataList = readObjectsFromCsv(file);
+    return writeAsJson(dataList);
+  }
+
+  public static final void println(final String s) {
+    System.out.println(String.format("[%s - %s] :%s", getDateToStr(new Date()), Thread.currentThread().getName(), s));
+  }
+
+  public static final void printlnErr(final String s) {
+    System.err.println(String.format("[%s - %s] :%s", getDateToStr(new Date()), Thread.currentThread().getName(), s));
+  }
+
+
+  public static List<Map<?, ?>> readObjectsFromCsv(final File file) throws IOException {
+    final CsvSchema bootstrap = CsvSchema.emptySchema().withHeader();
+    final CsvMapper csvMapper = new CsvMapper();
+    final MappingIterator<Map<?, ?>> mappingIterator = csvMapper.reader(Map.class).with(bootstrap).readValues(file);
+
+    return mappingIterator.readAll();
+  }
+
+  private static List<String> writeAsJson(final List<Map<?, ?>> dataList) throws IOException {
+    final ObjectMapper mapper = new ObjectMapper();
+    return dataList.stream().map(e -> {
+      try {
+        return mapper.writeValueAsString(e);
+      } catch (JsonProcessingException ex) {
+        return null;
+      }
+    }).filter(e -> Objects.nonNull(e)).collect(Collectors.toList());
+
   }
 
 }

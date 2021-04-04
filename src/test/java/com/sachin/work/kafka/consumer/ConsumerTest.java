@@ -15,6 +15,7 @@ import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.common.errors.WakeupException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 
 
@@ -26,6 +27,7 @@ public class ConsumerTest extends BaseTest {
   private String TOPIC;
 
   @Autowired
+  @Qualifier("kafkaConsumer_Genric")
   private KafkaConsumer<String, KafkaMessage<Contact>> kafkaConsumer;
 
 
