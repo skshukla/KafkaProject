@@ -40,8 +40,21 @@ public class KafkaProjectConfig {
     return kafkaTemplate;
   }
 
+
   @Bean
-  public KafkaConsumer<String, KafkaMessage<Contact>> kafkaConsumer() {
+  public KafkaConsumer<String, String> kafkaConsumer() {
+    final Properties props = new Properties();
+    props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, KAFKA_BROKERS);
+    props.put(ConsumerConfig.GROUP_ID_CONFIG, "ga_0");
+    props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
+    props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+    props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
+    return new KafkaConsumer<>(props);
+  }
+
+
+  @Bean
+  public KafkaConsumer<String, KafkaMessage<Contact>> kafkaConsumer_Generic() {
     final Properties props = new Properties();
     props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, KAFKA_BROKERS);
     props.put(ConsumerConfig.GROUP_ID_CONFIG, "ga_1");
