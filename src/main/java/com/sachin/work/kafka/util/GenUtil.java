@@ -66,16 +66,20 @@ public class GenUtil {
     return mappingIterator.readAll();
   }
 
-  private static List<String> writeAsJson(final List<Map<?, ?>> dataList) throws IOException {
-    final ObjectMapper mapper = new ObjectMapper();
+  public static List<String> writeAsJson(final List<Map<?, ?>> dataList) {
     return dataList.stream().map(e -> {
-      try {
-        return mapper.writeValueAsString(e);
-      } catch (JsonProcessingException ex) {
-        return null;
-      }
+      return writeAsJson(e);
     }).filter(e -> Objects.nonNull(e)).collect(Collectors.toList());
 
+  }
+
+  public static String writeAsJson(final Map<?, ?> data) {
+    final ObjectMapper mapper = new ObjectMapper();
+    try {
+      return mapper.writeValueAsString(data);
+    } catch (JsonProcessingException ex) {
+      return null;
+    }
   }
 
 }
