@@ -32,6 +32,14 @@ public class GenUtil {
     return sb.toString();
   }
 
+  public static void sleep(long millis) {
+    try {
+      Thread.currentThread().sleep(millis);
+    } catch (InterruptedException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
   public static final int getRandomNumBetween(final int start, final int end) {
     return start + (new Random().nextInt(end - start));
   }

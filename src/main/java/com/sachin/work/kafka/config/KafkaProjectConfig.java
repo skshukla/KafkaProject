@@ -35,6 +35,12 @@ public class KafkaProjectConfig {
   }
 
   @Bean
+  public KafkaTemplate<String, String> kafkaTemplate_Transactional() {
+    final KafkaTemplate<String, String> kafkaTemplate = new KafkaTemplate<>(this.producerFactory_Transactional());
+    return kafkaTemplate;
+  }
+
+  @Bean
   public <T> KafkaTemplate<String, KafkaMessage<T>> kafkaTemplate_GenericMessage() {
     final KafkaTemplate<String, KafkaMessage<T>> kafkaTemplate = new KafkaTemplate<>(this.producerFactory_GenericMessage());
     return kafkaTemplate;
@@ -82,6 +88,17 @@ public class KafkaProjectConfig {
 //    props.put(ProducerConfig.RETRIES_CONFIG, 3);
 //    props.put(ProducerConfig.REQUEST_TIMEOUT_MS_CONFIG, 1);
 
+    return new DefaultKafkaProducerFactory<>(props);
+  }
+
+
+  private ProducerFactory<String, String> producerFactory_Transactional() {
+    final Map<String, Object> props = new HashMap<>();
+    props.put(ProducerConfig.RETRY_BACKOFF_MS_CONFIG, 10);
+    props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, KAFKA_BROKERS);
+    props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
+    props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
+    props.put(ProducerConfig.TRANSACTIONAL_ID_CONFIG, "my-transactional-id");
     return new DefaultKafkaProducerFactory<>(props);
   }
 
